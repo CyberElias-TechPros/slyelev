@@ -54,24 +54,32 @@ export function Navbar() {
             ))}
           </div>
 
-          <a
-            href="/quote"
+          <Link
+            to="/quote"
             className="hidden md:inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-semibold magnetic-btn hover:cyan-glow transition-all"
           >
             Get Quote
-          </a>
+          </Link>
 
           <button
             onClick={() => setOpen(!open)}
             className="md:hidden p-2 text-foreground"
-            aria-label="Menu"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            onKeyDown={(e) => {
+              if (e.key === "Escape") setOpen(false);
+            }}
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </nav>
 
         {open && (
-          <div className="md:hidden mt-2 glass-strong rounded-2xl p-4 flex flex-col gap-1 animate-fade-in">
+          <div
+            id="mobile-nav"
+            className="md:hidden mt-2 glass-strong rounded-2xl p-4 flex flex-col gap-1 animate-fade-in"
+          >
             {links.map((l) => (
               <Link
                 key={l.to}

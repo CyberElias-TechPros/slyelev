@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://slyelevators.com/sitemap.xml

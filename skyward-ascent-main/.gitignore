@@ -18,3 +18,4 @@ dist/
 
 # bun.lock is the canonical lockfile for this project
 package-lock.json
+coverage/

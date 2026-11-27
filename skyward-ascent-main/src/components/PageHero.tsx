@@ -17,7 +17,12 @@ export function PageHero({
   return (
     <section className="relative pt-40 pb-24 overflow-hidden">
       <div className="absolute inset-0">
-        <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" loading="eager" />
+        <img
+          src={image}
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          loading="eager"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/60 to-background" />
         <div className="absolute inset-0 grid-bg opacity-50" />
       </div>
