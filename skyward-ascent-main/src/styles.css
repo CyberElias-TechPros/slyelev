@@ -50,11 +50,11 @@
   --radius: 0.5rem;
 
   /* Brand */
-  --brand-navy: oklch(0.18 0.04 250);      /* #081120 */
-  --brand-graphite: oklch(0.12 0.02 250);  /* #05070A */
-  --brand-steel: oklch(0.78 0.02 240);     /* #B8C2CC */
-  --brand-cyan: oklch(0.78 0.16 220);      /* #00C2FF */
-  --brand-gold: oklch(0.79 0.16 80);       /* #F4B400 */
+  --brand-navy: oklch(0.18 0.04 250); /* #081120 */
+  --brand-graphite: oklch(0.12 0.02 250); /* #05070A */
+  --brand-steel: oklch(0.78 0.02 240); /* #B8C2CC */
+  --brand-cyan: oklch(0.78 0.16 220); /* #00C2FF */
+  --brand-gold: oklch(0.79 0.16 80); /* #F4B400 */
 
   --background: var(--brand-graphite);
   --foreground: oklch(0.98 0 0);
@@ -83,6 +83,35 @@
   }
   html {
     scroll-behavior: smooth;
+    scrollbar-color: oklch(0.5 0.08 220 / 0.55) transparent;
+    scrollbar-width: thin;
+  }
+  ::selection {
+    background: oklch(0.78 0.16 220 / 0.85);
+    color: oklch(0.12 0.02 250);
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: oklch(0.45 0.08 220 / 0.5);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: oklch(0.62 0.12 220 / 0.8);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand-cyan);
+    outline-offset: 3px;
+    border-radius: 4px;
   }
   body {
     background: var(--color-background);
@@ -91,7 +120,11 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
@@ -99,30 +132,33 @@
 
 @layer utilities {
   .glass {
-    background: linear-gradient(135deg, oklch(1 0 0 / 0.06), oklch(1 0 0 / 0.02));
+    background: linear-gradient(
+      135deg,
+      oklch(1 0 0 / 0.06),
+      oklch(1 0 0 / 0.02)
+    );
     backdrop-filter: blur(20px) saturate(140%);
     -webkit-backdrop-filter: blur(20px) saturate(140%);
     border: 1px solid oklch(1 0 0 / 0.08);
   }
   .glass-strong {
-    background: linear-gradient(135deg, oklch(1 0 0 / 0.1), oklch(1 0 0 / 0.04));
+    background: linear-gradient(
+      135deg,
+      oklch(1 0 0 / 0.1),
+      oklch(1 0 0 / 0.04)
+    );
     backdrop-filter: blur(24px) saturate(160%);
     -webkit-backdrop-filter: blur(24px) saturate(160%);
     border: 1px solid oklch(1 0 0 / 0.12);
   }
+  /* Gradient-text (background-clip: text) removed: on some browsers the
+     gradient fails to paint while the text stays transparent, making headings
+     invisible until selected. Solid, always-visible colors instead. */
   .text-gradient {
-    background: linear-gradient(135deg, oklch(0.98 0 0) 0%, var(--brand-cyan) 60%, var(--brand-steel) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: var(--color-foreground);
   }
   .text-gradient-gold {
-    background: linear-gradient(135deg, var(--brand-gold), oklch(0.95 0.05 80));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
+    color: var(--brand-gold);
   }
   .grid-bg {
     background-image:
@@ -131,10 +167,16 @@
     background-size: 60px 60px;
   }
   .radial-glow {
-    background: radial-gradient(circle at 50% 0%, oklch(0.78 0.16 220 / 0.25), transparent 60%);
+    background: radial-gradient(
+      circle at 50% 0%,
+      oklch(0.78 0.16 220 / 0.25),
+      transparent 60%
+    );
   }
   .cyan-glow {
-    box-shadow: 0 0 40px oklch(0.78 0.16 220 / 0.35), 0 0 80px oklch(0.78 0.16 220 / 0.15);
+    box-shadow:
+      0 0 40px oklch(0.78 0.16 220 / 0.35),
+      0 0 80px oklch(0.78 0.16 220 / 0.15);
   }
   .magnetic-btn {
     position: relative;
@@ -143,26 +185,127 @@
   .magnetic-btn:hover {
     transform: translateY(-2px);
   }
+  .card-lift {
+    transition:
+      transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1),
+      border-color 0.45s,
+      box-shadow 0.45s;
+  }
+  .card-lift:hover {
+    transform: translateY(-4px);
+    border-color: oklch(0.78 0.16 220 / 0.4);
+    box-shadow: 0 16px 48px -16px oklch(0.78 0.16 220 / 0.28);
+  }
+  /* Sheen sweep across buttons on hover */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-sheen::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    background: linear-gradient(
+      100deg,
+      transparent,
+      oklch(1 0 0 / 0.35),
+      transparent
+    );
+    transform: translateX(-140%) skewX(-16deg);
+    pointer-events: none;
+  }
+  .btn-sheen:hover::after {
+    animation: sheen 0.9s ease;
+  }
+  .ken-burns {
+    animation: ken-burns 20s ease-out forwards;
+  }
+  .pulse-anim {
+    animation: pulse-ring 2.2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-12px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px oklch(0.78 0.16 220 / 0.4); }
-  50% { box-shadow: 0 0 40px oklch(0.78 0.16 220 / 0.7); }
+  0%,
+  100% {
+    box-shadow: 0 0 20px oklch(0.78 0.16 220 / 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px oklch(0.78 0.16 220 / 0.7);
+  }
 }
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 @keyframes ticker {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-@font-face {
-  font-family: "Clash Display";
-  src: url("https://api.fontshare.com/v2/css?f[]=clash-display@600,700&display=swap");
+@keyframes route-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+@keyframes sheen {
+  0% {
+    transform: translateX(-140%) skewX(-16deg);
+  }
+  100% {
+    transform: translateX(320%) skewX(-16deg);
+  }
+}
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+@keyframes ken-burns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.14);
+  }
+}
+
+/* Respect users who prefer reduced motion: stop decorative animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -14,6 +14,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as GlassRouteImport } from './routes/glass'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as ElevatorsRouteImport } from './routes/elevators'
@@ -44,6 +45,11 @@ const QuoteRoute = QuoteRouteImport.update({
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GlassRoute = GlassRouteImport.update({
@@ -84,6 +90,7 @@ export interface FileRoutesByFullPath {
   '/elevators': typeof ElevatorsRoute
   '/faq': typeof FaqRoute
   '/glass': typeof GlassRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
@@ -97,6 +104,7 @@ export interface FileRoutesByTo {
   '/elevators': typeof ElevatorsRoute
   '/faq': typeof FaqRoute
   '/glass': typeof GlassRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
@@ -111,6 +119,7 @@ export interface FileRoutesById {
   '/elevators': typeof ElevatorsRoute
   '/faq': typeof FaqRoute
   '/glass': typeof GlassRoute
+  '/privacy': typeof PrivacyRoute
   '/projects': typeof ProjectsRoute
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
@@ -126,6 +135,7 @@ export interface FileRouteTypes {
     | '/elevators'
     | '/faq'
     | '/glass'
+    | '/privacy'
     | '/projects'
     | '/quote'
     | '/services'
@@ -139,6 +149,7 @@ export interface FileRouteTypes {
     | '/elevators'
     | '/faq'
     | '/glass'
+    | '/privacy'
     | '/projects'
     | '/quote'
     | '/services'
@@ -152,6 +163,7 @@ export interface FileRouteTypes {
     | '/elevators'
     | '/faq'
     | '/glass'
+    | '/privacy'
     | '/projects'
     | '/quote'
     | '/services'
@@ -166,6 +178,7 @@ export interface RootRouteChildren {
   ElevatorsRoute: typeof ElevatorsRoute
   FaqRoute: typeof FaqRoute
   GlassRoute: typeof GlassRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProjectsRoute: typeof ProjectsRoute
   QuoteRoute: typeof QuoteRoute
   ServicesRoute: typeof ServicesRoute
@@ -208,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/glass': {
@@ -262,6 +282,7 @@ const rootRouteChildren: RootRouteChildren = {
   ElevatorsRoute: ElevatorsRoute,
   FaqRoute: FaqRoute,
   GlassRoute: GlassRoute,
+  PrivacyRoute: PrivacyRoute,
   ProjectsRoute: ProjectsRoute,
   QuoteRoute: QuoteRoute,
   ServicesRoute: ServicesRoute,
