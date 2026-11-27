@@ -273,7 +273,7 @@ function ContactPage() {
               </Field>
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold magnetic-btn hover:cyan-glow"
+                className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 font-semibold magnetic-btn hover:cyan-glow btn-sheen"
               >
                 Send Message <Send size={16} />
               </button>

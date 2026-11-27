@@ -12,6 +12,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
+import { CountUp } from "@/components/motion";
 import { IMG } from "@/lib/images";
 
 export const Route = createFileRoute("/about")({
@@ -37,10 +38,10 @@ const values = [
 ];
 
 const stats = [
-  { n: "1,500+", l: "Installations" },
-  { n: "266+", l: "Global Partners" },
-  { n: "20+", l: "Years Experience" },
-  { n: "110+", l: "Engineers" },
+  { n: 1500, l: "Installations" },
+  { n: 266, l: "Global Partners" },
+  { n: 20, l: "Years Experience" },
+  { n: 110, l: "Engineers" },
 ];
 
 function AboutPage() {
@@ -117,7 +118,7 @@ function AboutPage() {
           {stats.map((s) => (
             <div key={s.l}>
               <div className="text-4xl md:text-5xl font-bold text-gradient-gold">
-                {s.n}
+                <CountUp to={s.n} suffix="+" />
               </div>
               <div className="mt-2 text-sm uppercase tracking-wider text-muted-foreground">
                 {s.l}

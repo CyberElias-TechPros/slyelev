@@ -165,7 +165,7 @@ function ElevatorPage() {
 export function Accordion({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="glass rounded-2xl mb-3 overflow-hidden">
+    <div className="glass rounded-2xl mb-3 overflow-hidden card-lift">
       <button
         onClick={() => setOpen(!open)}
         className="w-full flex items-center justify-between gap-4 p-5 text-left"
@@ -179,6 +179,7 @@ export function Accordion({ q, a }: { q: string; a: string }) {
       <motion.div
         initial={false}
         animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
+        transition={{ duration: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
         className="overflow-hidden"
       >
         <p className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed">

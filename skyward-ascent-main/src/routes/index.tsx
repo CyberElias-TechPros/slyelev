@@ -16,6 +16,7 @@ import {
   Quote,
 } from "lucide-react";
 import { IMG } from "@/lib/images";
+import { CountUp, Magnetic, Tilt } from "@/components/motion";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -164,16 +165,18 @@ function Hero() {
           transition={{ delay: 0.8, duration: 0.7 }}
           className="mt-10 flex flex-wrap gap-4"
         >
-          <a
-            href={MAIL_QUOTE}
-            className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-4 font-semibold magnetic-btn animate-pulse-glow"
-          >
-            Request a Quote{" "}
-            <ArrowRight
-              size={18}
-              className="group-hover:translate-x-1 transition-transform"
-            />
-          </a>
+          <Magnetic strength={0.18}>
+            <a
+              href={MAIL_QUOTE}
+              className="group inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-4 font-semibold magnetic-btn btn-sheen"
+            >
+              Request a Quote{" "}
+              <ArrowRight
+                size={18}
+                className="group-hover:translate-x-1 transition-transform"
+              />
+            </a>
+          </Magnetic>
           <a
             href={MAIL_VISIT}
             className="inline-flex items-center gap-2 rounded-full glass-strong px-7 py-4 font-semibold magnetic-btn hover:border-primary"
@@ -323,7 +326,9 @@ function AboutPreview() {
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           <div className="absolute bottom-6 left-6 right-6 glass-strong rounded-2xl p-5">
-            <div className="text-3xl font-bold text-gradient-gold">20+</div>
+            <div className="text-3xl font-bold text-gradient-gold">
+              <CountUp to={20} suffix="+" />
+            </div>
             <div className="text-xs text-muted-foreground mt-1">
               Years engineering the skyline
             </div>
@@ -384,37 +389,38 @@ function ServicesOverview() {
         </div>
         <div className="grid md:grid-cols-3 gap-6">
           {services.map((s, i) => (
-            <MotionLink
-              key={s.title}
-              to={s.href}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="group relative h-[28rem] rounded-3xl overflow-hidden glass cursor-pointer"
-            >
-              <img
-                src={s.img}
-                alt={s.title}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-primary/20 to-transparent" />
-              <div className="relative h-full flex flex-col justify-end p-7">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl glass-strong text-primary mb-4 group-hover:cyan-glow transition-shadow">
-                  <s.icon size={22} />
+            <Tilt key={s.title} max={6} className="h-[28rem]">
+              <MotionLink
+                to={s.href}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.6 }}
+                className="group relative h-full rounded-3xl overflow-hidden glass cursor-pointer"
+              >
+                <img
+                  src={s.img}
+                  alt={s.title}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-t from-primary/20 to-transparent" />
+                <div className="relative h-full flex flex-col justify-end p-7">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl glass-strong text-primary mb-4 group-hover:cyan-glow transition-shadow">
+                    <s.icon size={22} />
+                  </div>
+                  <h3 className="text-2xl font-semibold mb-2">{s.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">{s.text}</p>
+                  <div className="inline-flex items-center gap-2 text-primary text-sm font-medium">
+                    Explore{" "}
+                    <ArrowRight
+                      size={14}
+                      className="group-hover:translate-x-1 transition-transform"
+                    />
+                  </div>
                 </div>
-                <h3 className="text-2xl font-semibold mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{s.text}</p>
-                <div className="inline-flex items-center gap-2 text-primary text-sm font-medium">
-                  Explore{" "}
-                  <ArrowRight
-                    size={14}
-                    className="group-hover:translate-x-1 transition-transform"
-                  />
-                </div>
-              </div>
-            </MotionLink>
+              </MotionLink>
+            </Tilt>
           ))}
         </div>
       </div>
@@ -629,12 +635,14 @@ function FinalCTA() {
             tailored to your building.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href={MAIL_QUOTE}
-              className="rounded-full bg-primary text-primary-foreground px-8 py-4 font-semibold magnetic-btn animate-pulse-glow"
-            >
-              Request a Quote
-            </a>
+            <Magnetic strength={0.18}>
+              <a
+                href={MAIL_QUOTE}
+                className="inline-block rounded-full bg-primary text-primary-foreground px-8 py-4 font-semibold magnetic-btn btn-sheen"
+              >
+                Request a Quote
+              </a>
+            </Magnetic>
             <a
               href={MAIL_VISIT}
               className="rounded-full glass-strong px-8 py-4 font-semibold magnetic-btn hover:border-primary"

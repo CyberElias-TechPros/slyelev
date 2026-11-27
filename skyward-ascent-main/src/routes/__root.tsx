@@ -9,11 +9,13 @@ import {
 } from "@tanstack/react-router";
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { MotionConfig } from "framer-motion";
 
 import appCss from "../styles.css?url";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
+import { ScrollProgress } from "@/components/motion";
 import { DEFAULT_OG_IMAGE, organizationJsonLd } from "@/lib/seo";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
@@ -202,14 +204,17 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-background text-foreground">
-        <Navbar />
-        <main>
-          <Outlet />
-        </main>
-        <Footer />
-        <WhatsAppFab />
-      </div>
+      <MotionConfig reducedMotion="user">
+        <ScrollProgress />
+        <div className="min-h-screen bg-background text-foreground">
+          <Navbar />
+          <main>
+            <Outlet />
+          </main>
+          <Footer />
+          <WhatsAppFab />
+        </div>
+      </MotionConfig>
     </QueryClientProvider>
   );
 }
